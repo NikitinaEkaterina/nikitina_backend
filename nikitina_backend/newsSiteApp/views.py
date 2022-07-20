@@ -1,7 +1,6 @@
 from rest_framework import viewsets
 
 from .models import User, News, Tag
-
 from .serializers import UserSerialiser, NewsSerialiser, TagSerialiser
 
 
