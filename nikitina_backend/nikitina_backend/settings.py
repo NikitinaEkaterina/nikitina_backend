@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import environ
 
 env = environ.Env()
@@ -24,6 +25,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders'
 ]
+
+AUTH_USER_MODEL = 'newsSiteApp.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
