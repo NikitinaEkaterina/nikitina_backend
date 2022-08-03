@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import timedelta
 import environ
 
 env = environ.Env()
@@ -21,8 +22,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newsSiteApp',
+    'rest_framework_simplejwt',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
 ]
 
 AUTH_USER_MODEL = 'newsSiteApp.User'
@@ -39,7 +41,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5500',
+    'http://localhost:3000',
     'http://127.0.0.1:5500',
     'http://localhost:3001',
 ]
@@ -101,3 +103,14 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
+    'ROTATE_REFRESH_TOKENS': True,
+}
