@@ -4,16 +4,21 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     avatar = models.ImageField(blank=True, upload_to='post-images')
+    email = models.EmailField(blank=True, unique=True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
+    class Meta:
+        unique_together = ['email']
+    
     def __str__(self) -> str:
-        return str(self.username)
-
+        return str(self.email)
 
 class News(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author')
     title = models.CharField(max_length=100)
-    text = models.TextField
-    image = models.TextField
+    text = models.TextField(blank=True)
+    image = models.ImageField(blank=True, upload_to='images')
     tag = models.ManyToManyField('Tag', related_name='news', blank=True)
 
     def __str__(self) -> str:
@@ -25,3 +30,4 @@ class Tag(models.Model):
 
     def __str__(self) -> str:
         return str(self.name)
+
