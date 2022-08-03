@@ -7,12 +7,9 @@ class User(AbstractUser):
     email = models.EmailField(blank=True, unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
-
-    class Meta:
-        unique_together = ['email']
     
     def __str__(self) -> str:
-        return str(self.email)
+        return self.username
 
 class News(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author')
