@@ -15,13 +15,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-class UserSerialiser(serializers.ModelSerializer):
-    def validate_password(self, value: str) -> str:
-        return make_password(value)
-
-    class Meta:
-        model = User
-        fields = '__all__'
 
 class NewsSerialiser(serializers.ModelSerializer):
      author = serializers.SlugRelatedField(
@@ -34,9 +27,20 @@ class NewsSerialiser(serializers.ModelSerializer):
         many=True,
         queryset=Tag.objects
      )
+
      class Meta:
         model = News
         fields = ['id','title', 'text', 'image', 'author', 'tag']
+
+class UserSerialiser(serializers.ModelSerializer):
+
+    def validate_password(self, value: str) -> str:
+        return make_password(value)
+
+    class Meta:
+        model = User
+        fields = '__all__'
+
 
 class TagSerialiser(serializers.ModelSerializer):
     class Meta:
