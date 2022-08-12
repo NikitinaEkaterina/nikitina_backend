@@ -1,9 +1,13 @@
 from rest_framework import viewsets
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from rest_framework.response import Response
 
 from .models import User, News, Tag
-from .serializers import UserSerialiser, NewsSerialiser, TagSerialiser
+from .serializers import UserSerialiser, NewsSerialiser, TagSerialiser, MyTokenObtainPairSerializer
 
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

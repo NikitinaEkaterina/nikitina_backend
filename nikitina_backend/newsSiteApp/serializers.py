@@ -8,17 +8,26 @@ from .models import User, News, Tag
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
-        token = super().get_token(user)
+        token = super().get_token(user, )
         token['id'] = user.name
         return token
 
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super(MyTokenObtainPairSerializer, self).validate(attrs)
+        data.update({'user': self.user.username})
+        data.update({'id': self.user.id})
+        return data
+
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        return token
 
 
 class NewsSerialiser(serializers.ModelSerializer):
      author = serializers.SlugRelatedField(
-        slug_field='username',
+        slug_field='username', 
         queryset=User.objects
      )
      
@@ -30,7 +39,7 @@ class NewsSerialiser(serializers.ModelSerializer):
 
      class Meta:
         model = News
-        fields = ['id','title', 'text', 'image', 'author', 'tag']
+        fields = ['id','title', 'text', 'image', 'author', 'tag', 'author_id']
 
 class UserSerialiser(serializers.ModelSerializer):
 
@@ -39,7 +48,7 @@ class UserSerialiser(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'username', 'email', 'avatar', 'author']
 
 
 class TagSerialiser(serializers.ModelSerializer):
