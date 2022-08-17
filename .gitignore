@@ -4,6 +4,7 @@ db.sqlite3
 .env
 nikitina_backend/__pycache__
 migrations/__pycache__
+.vscode
 # Created by https://www.gitignore.io
 
 ### OSX ###
