@@ -10,5 +10,5 @@ router.register(r'news', NewsViewSet, basename="news")
 router.register(r'tags', TagViewSet, basename="tags")
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
 ]
