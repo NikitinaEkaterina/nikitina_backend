@@ -35,14 +35,10 @@ class NewsViewSet(viewsets.ModelViewSet):
         name = Tag.objects.get_or_create(name=request.data['tag'])
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        instance = self.perform_create(serializer)
+        instance = serializer.save()
         instance.tag.add(name[0])
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    def perform_create(self, serializer):
-        instance = serializer.save()
-        return instance
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
