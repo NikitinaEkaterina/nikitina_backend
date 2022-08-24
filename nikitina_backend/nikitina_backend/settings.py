@@ -68,12 +68,12 @@ WSGI_APPLICATION = 'nikitina_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': env('DB_ENGINE'),
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT')
+        'ENGINE': env ('DB_ENGINE'),
+        'NAME': env ('DB_NAME'),
+        'USER': env ('DB_USER'),
+        'PASSWORD': env ('DB_PASSWORD'),
+        'HOST': env ('DB_HOST'),
+        'PORT': env ('DB_PORT')
     }
 }
 
@@ -110,7 +110,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
    'rest_framework.permissions.AllowAny',
-]
+],
 }
 
 SIMPLE_JWT = {
