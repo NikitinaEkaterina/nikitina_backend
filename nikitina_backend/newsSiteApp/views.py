@@ -1,7 +1,6 @@
 from rest_framework import viewsets, status
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import User, News, Tag
 from .serializers import UserSerialiser, NewsSerialiser, TagSerialiser, MyTokenObtainPairSerializer
@@ -16,7 +15,6 @@ class UserViewSet(viewsets.ModelViewSet):
 class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerialiser
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def list(self, request, *args, **kwargs):
         if bool(request.query_params):
